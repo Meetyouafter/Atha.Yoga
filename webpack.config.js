@@ -1,87 +1,73 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+const isProd = process.env.NODE_ENV === "production";
+const isDev = !isProd;
 
 module.exports = {
-  mode: 'development',
+  mode: "development",
   target: "web",
-  entry: {
-    main: path.join(__dirname, 'src', 'index.jsx'),
-  },
-  devtool: 'inline-source-map',
+  entry: "./src/index.jsx",
+  devtool: "inline-source-map",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-filename: '[name].[hash].js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "[name].[hash].js",
     clean: true,
-    publicPath: '/',
+    publicPath: "/",
   },
   devServer: {
-    static: './dist',
+    static: "./dist",
     hot: true,
-    port: 8080,
-    open: true
+    port: 8100,
+    open: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Output Management',
+      title: "Output Management",
       template: "./src/index.html",
-      favicon: "./src/favicon.ico"   
+      favicon: "./src/favicon.ico",
     }),
-  ],
+    isDev && new ReactRefreshWebpackPlugin(),
+  ].filter(Boolean),
   module: {
     rules: [
       {
         test: /\.s?css$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
-        type: 'asset/resource',
+        type: "asset/resource",
         generator: {
-            filename: 'assets/images/[name].[ext]'
-        }
+          filename: "assets/images/[name].[ext]",
+        },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource',
+        type: "asset/resource",
         generator: {
-            filename: 'assets/fonts/[name].[ext]'
-          }
-      },
-      { 
-        test: /\.(html)$/, 
-        use: ['html-loader'] 
+          filename: "assets/fonts/[name].[ext]",
+        },
       },
       {
-        test: /\.m?js$/,
+        test: /\.[jt]sx?$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }
-      },
-      {
-        test: /\.m?jsx$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
+            plugins: [isDev && require.resolve("react-refresh/babel")].filter(
+              Boolean
+            ),
             presets: [
-                [
-                  "@babel/preset-react",
-                  {
-                    "pragma": "dom", // default pragma is React.createElement (only in classic runtime)
-                    "pragmaFrag": "DomFrag", // default is React.Fragment (only in classic runtime)
-                    "throwIfNamespace": false, // defaults to true
-                    "runtime": "classic" // defaults to classic
-                    // "importSource": "custom-jsx-library" // defaults to react (only in automatic runtime)
-                  }
-                ]
-              ]
-          }
-        }
-      }
+              "@babel/preset-env",
+              [
+                "@babel/preset-react"
+              ],
+            ],
+          },
+        },
+      },
     ],
   },
-}
+};
