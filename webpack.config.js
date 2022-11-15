@@ -1,15 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
-
-const eslint = new ESLint(options);
 
 module.exports = {
   mode: 'development',
-target: "web",
-entry: {
+  target: "web",
+  entry: {
     main: path.join(__dirname, 'src', 'index.jsx'),
-},
+  },
   devtool: 'inline-source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -29,7 +26,6 @@ filename: '[name].[hash].js',
       template: "./src/index.html",
       favicon: "./src/favicon.ico"   
     }),
-    eslint,
   ],
   module: {
     rules: [
