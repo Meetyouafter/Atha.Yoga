@@ -5,7 +5,7 @@ const Body = () => {
     <div>
       <div>Hello</div>
       <div>Hi</div>
-      <div>Salem</div>
+      <div>Salam</div>
     </div>
   );
 };
