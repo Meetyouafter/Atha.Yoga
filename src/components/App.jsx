@@ -1,10 +1,11 @@
 import React from "react";
+import Body from "./Body.jsx";
 
 const App = () => {
     return (
         <h1>
-            React here!!
-            ok??
+            React is here!
+            <Body />
         </h1>
     )
 }

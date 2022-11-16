@@ -1,4 +1,3 @@
-const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
@@ -9,7 +8,7 @@ module.exports = {
   mode: "development",
   target: "web",
   entry: "./src/index.jsx",
-  devtool: "inline-source-map",
+  devtool:"eval-source-map",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].[hash].js",
@@ -28,13 +27,17 @@ module.exports = {
       template: "./src/index.html",
       favicon: "./src/favicon.ico",
     }),
-    isDev && new ReactRefreshWebpackPlugin(),
-  ].filter(Boolean),
+  ],
   module: {
     rules: [
       {
         test: /\.s?css$/i,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: ["style-loader", "css-loader", "scoped-css-loader", "sass-loader"],
+      },
+      {
+        test: /\.js|jsx$/,
+        enforce: "pre",
+        use: ["source-map-loader"],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
@@ -56,9 +59,6 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            plugins: [isDev && require.resolve("react-refresh/babel")].filter(
-              Boolean
-            ),
             presets: [
               "@babel/preset-env",
               [
