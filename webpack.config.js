@@ -1,24 +1,47 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const TerserWebpackPlugin = require("terser-webpack-plugin");
 
 const isProd = process.env.NODE_ENV === "production";
 const isDev = !isProd;
+
+const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`
+
+const optimization = () => {
+  const config = {
+    minimize: true,
+    splitChunks: {
+      chunks: 'all'
+    }
+  }
+  if (isProd) {
+    config.minimizer = [
+      new TerserWebpackPlugin(),
+      new MiniCssExtractPlugin({
+        test: /\.foo\.css$/i,
+      })
+    ]
+  }
+  return config;
+}
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   mode: "development",
   target: "web",
   entry: "./index.jsx",
-  devtool:"eval-source-map",
+  devtool: isDev ? "eval-source-map" : '',
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].[hash].js",
+    filename: filename('js'),
     clean: true,
     publicPath: "/",
   },
+  optimization: optimization(),
   devServer: {
     static: "./dist",
-    hot: true,
+    hot: isDev,
     port: 8080,
     open: true,
   },
@@ -27,13 +50,19 @@ module.exports = {
       title: "Output Management",
       template: "./index.html",
       favicon: "./favicon.ico",
+      minify: {
+        collapseWhitespace: isProd
+      }
+    }),
+    new MiniCssExtractPlugin({
+      filename: filename('css')
     }),
   ],
   module: {
     rules: [
       {
         test: /\.s?css$/i,
-        use: ["style-loader", "css-loader", "scoped-css-loader", "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "scoped-css-loader", "sass-loader"],
       },
       {
         test: /\.js|jsx$/,
@@ -55,8 +84,8 @@ module.exports = {
         },
       },
       {
-        test: /\.[jt]sx?$/,
-        exclude: /node_modules/,
+        test: /\.[jt]sx?$/, 
+        exclude: /node_modules/,  //не нужно компилировать
         use: {
           loader: "babel-loader",
           options: {
