@@ -5,9 +5,10 @@ const isProd = process.env.NODE_ENV === "production";
 const isDev = !isProd;
 
 module.exports = {
+  context: path.resolve(__dirname, 'src'),
   mode: "development",
   target: "web",
-  entry: "./src/index.jsx",
+  entry: "./index.jsx",
   devtool:"eval-source-map",
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -24,8 +25,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: "Output Management",
-      template: "./src/index.html",
-      favicon: "./src/favicon.ico",
+      template: "./index.html",
+      favicon: "./favicon.ico",
     }),
   ],
   module: {
