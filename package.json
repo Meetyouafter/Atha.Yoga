@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Meetyouafter/webpack-test#readme",
   "dependencies": {
+    "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "scoped-css-loader": "^1.0.0"
