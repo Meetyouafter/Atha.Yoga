@@ -18,9 +18,7 @@ const optimization = () => {
   if (isProd) {
     config.minimizer = [
       new TerserWebpackPlugin(),
-      new MiniCssExtractPlugin({
-        test: /\.foo\.css$/i,
-      })
+      new MiniCssExtractPlugin()
     ]
   }
   return config;
@@ -31,7 +29,7 @@ module.exports = {
   mode: "development",
   target: "web",
   entry: "./index.jsx",
-  devtool: isDev ? "eval-source-map" : '',
+  devtool: isDev ? "eval-source-map" : 'nosources-source-map',
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: filename('js'),
@@ -48,7 +46,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: "Output Management",
-      template: "./index.html",
+      template: "index.html",
       favicon: "./favicon.ico",
       minify: {
         collapseWhitespace: isProd
