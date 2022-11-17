@@ -47,7 +47,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "Output Management",
       template: "index.html",
-      favicon: "./favicon.ico",
       minify: {
         collapseWhitespace: isProd
       }

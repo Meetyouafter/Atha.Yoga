@@ -1,4 +1,3 @@
-import './style.css'
 import './scss.scss'
 import React from 'react'
 import ReactDOM from 'react-dom'
