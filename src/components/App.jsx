@@ -6,6 +6,6 @@ const App = () => {
             Webpack
         </h1>
     )
-}
+};
 
 export default App;
