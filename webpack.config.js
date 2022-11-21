@@ -29,7 +29,7 @@ module.exports = {
   mode: "development",
   target: "web",
   entry: "./index.jsx",
-  devtool: isDev ? "eval-source-map" : 'nosources-source-map',
+  devtool: isDev ? 'source-map' : "eval-source-map",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: filename('js'),
