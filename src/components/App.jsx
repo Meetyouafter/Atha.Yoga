@@ -1,11 +1,11 @@
-import React from 'react';
-import FirstPage from './SplashScreens/FirstPage.jsx';
-import StartPage from './SplashScreens/StartPage.jsx';
+import React, { useState } from 'react';
+import SplashScreens from './SplashScreens/SplashScreens.jsx';
 
 const App = () => {
+  const [active, setActive] = useState('first')
   return (
     <>
-      <FirstPage />
+      <SplashScreens />
     </>
   );
 };
