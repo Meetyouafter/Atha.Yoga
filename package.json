@@ -20,12 +20,16 @@
   },
   "homepage": "https://github.com/Meetyouafter/webpack-test#readme",
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.10.15",
     "babel-plugin-react-css-modules": "^5.2.6",
     "bootstrap": "^5.2.3",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
     "react-dom": "^18.2.0",
+    "react-material-ui-carousel": "^3.4.2",
     "scoped-css-loader": "^1.0.0"
   },
   "devDependencies": {
