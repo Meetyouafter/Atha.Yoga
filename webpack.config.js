@@ -59,7 +59,7 @@ module.exports = {
     rules: [
       {
         test: /\.s?css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "scoped-css-loader", "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader", "scoped-css-loader"],
       },
       {
         test: /\.js|jsx$/,
