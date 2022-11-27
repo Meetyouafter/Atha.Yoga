@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
-import { Counter } from './Counter.jsx';
-import EmailScreen from './SignInScreens/EmailScreen.jsx';
-import CheckedScreen from './SignInScreens/CheckedScreen.jsx';
-import SignInScreens from './SignInScreens/SignInScreens.jsx';
-import SplashScreens from './SplashScreens/SplashScreens.jsx';
-import Todo from './Todo.jsx';
+import SignUp from './SignUp/SignUp.jsx';
+import Greeting from './Greeting/Greeting.jsx';
+import { Routes, Route } from 'react-router-dom';
+import Profile from './Profile/Profile.jsx';
+import Login from './Login/Login.jsx';
 
 const App = () => {
-  const [active, setActive] = useState('first');
   return (
     <>
-    <SignInScreens />
+      <Routes>
+        <Route path='/' element={<Greeting />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<SignUp />} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path="*" element={<Greeting />} />
+      </Routes>
     </>
   );
 };

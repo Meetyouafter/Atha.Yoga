@@ -4,17 +4,18 @@ import vk from './../../assets/images/SignIn/vk.png';
 import yandex from './../../assets/images/SignIn/yandex.png';
 import facebook from './../../assets/images/SignIn/facebook.png';
 import google from './../../assets/images/SignIn/google.png';
-import './SignInScreens.scoped.scss';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
 import { addNewUser } from '../store/autorizationSlice.js';
+import MailSend from './MailSend/MailSend.jsx';
+import { Link } from 'react-router-dom';
+import './SignUp.scoped.scss';
 
-const SignInScreen = () => {
+const SignUp = () => {
   const users = useSelector((state) => state.autorization.users);
   const dispatch = useDispatch();
-  console.log(users);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().required('Email is required').email('Email is invalid'),
@@ -41,10 +42,16 @@ const SignInScreen = () => {
         id: data.email,
       })
     );
+    fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: {'Content-Type' : 'application/json'},
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
   };
 
   return (
-    <div className='signIn_container'>
+    <div className='container'>
       <h1 className='signIn_title'>Создать аккаунт</h1>
       <div className='signIn_body_container'>
         <form
@@ -85,7 +92,7 @@ const SignInScreen = () => {
                 errors.acceptTerms ? 'is-invalid' : ''
               }`}
             />
-              <span className='apply_term'>Я принимаю условия</span> 
+              <span className='apply_term'>Я принимаю условия  </span> 
               <a href='#'>пользовательского соглашения</a>
 
             <div className='invalid-feedback'>
@@ -101,22 +108,18 @@ const SignInScreen = () => {
         </form>
         <div className='footer_container'>
           <div className='footer'>Уже есть аккаунт?</div>
-          <a href='#'>Войти</a>
+          <Link to='/login'>Войти</Link>
         </div>
         Или войти с помощью
         <div>
-          <img className='logo' src={facebook} alt='facebook' />
-          <img className='logo' src={google} alt='google' />
-          <img className='logo' src={yandex} alt='yandex' />
-          <img className='logo' src={vk} alt='vk' />
+          <img src={facebook} alt='facebook' />
+          <img src={google} alt='google' />
+          <img src={yandex} alt='yandex' />
+          <img src={vk} alt='vk' />
         </div>
       </div>
     </div>
   );
 };
 
-const SignInScreens = () => {
-  return <SignInScreen />;
-};
-
-export default SignInScreens;
+export default SignUp;

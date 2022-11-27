@@ -1,13 +1,8 @@
-import React from 'react'
+import React from 'react';
 import './Profile.scoped.scss';
 
 const Profile = () => {
-  return (
-    <div className='signIn_container'>
-PROFILE
-    </div>
-    
-  );
+  return <div className='container'>PROFILE</div>;
 };
 
 export default Profile;

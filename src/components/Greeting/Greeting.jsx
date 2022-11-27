@@ -1,18 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import icon from './../../assets/images/SplashScreens/icon.png';
+import { Link } from 'react-router-dom';
 import firstImg from './../../assets/images/SplashScreens/firstPage.png';
 import secondImg from './../../assets/images/SplashScreens/secondPage.png';
 import thirdImg from './../../assets/images/SplashScreens/thirdPage.png';
-import './SplashScreens.scoped.scss';
 import Carousel from 'react-bootstrap/Carousel';
-
-const StartPage = ({onClick}) => {
-  return (
-    <div className='startPage_container' onClick={onClick}>
-      <img className='startPage_logo' src={icon} alt='logo' />
-    </div>
-  );
-};
+import Logo from './Logo/Logo.jsx';
+import './Greeting.scoped.scss';
 
 const FirstScreen = () => {
   return (
@@ -59,54 +52,61 @@ const ThirdScreen = () => {
   );
 };
 
-const SplashScreens = () => {
-  const [onStartPage, setOnStartPage] = useState('on')
+const Greeting = () => {
+  const [onStartPage, setOnStartPage] = useState('on');
 
-  const onHideStartPage = () => setOnStartPage('hidden')
+  const onHideLogo = () => setOnStartPage('hidden');
 
   useEffect(() => {
     setTimeout(() => {
-    setOnStartPage('hidden')
-    }, 5000), []})
+      setOnStartPage('hidden');
+    }, 5000),
+      [];
+  });
+
+  const onRegister = () => {
+    window.location.assign('http://localhost:3000/second/');
+  }
 
   const splashScreensChoise = () => {
     if (onStartPage === 'on') {
-      return <StartPage onClick={onHideStartPage}/>
+      return <Logo onClick={onHideLogo} />;
     }
     return (
       <div className='container'>
-      <Carousel>
-        <Carousel.Item>
-          <FirstScreen />
-        </Carousel.Item>
-        <Carousel.Item>
-          <SecondScreen />
-        </Carousel.Item>
-        <Carousel.Item>
-          <ThirdScreen />
-        </Carousel.Item>
-      </Carousel>
-      <div className='slider_container'>
-        <div className='slider'></div>
-        <div className='slider'></div>
-        <div className='slider'></div>
-      </div>
-      <div>
-        <button className='prime_btn'>
-          <span className='btn_text'>ПРИСОЕДИНИТЬСЯ</span>
-        </button>
-      </div>
-      <div className='footer_container'>
-        <div className='footer'>Уже есть аккаунт?</div>
-        <a href='#'>Войти</a>
-      </div>
-    </div>
-    )
-  }
+        <Carousel>
+          <Carousel.Item>
+            <FirstScreen />
+          </Carousel.Item>
+          <Carousel.Item>
+            <SecondScreen />
+          </Carousel.Item>
+          <Carousel.Item>
+            <ThirdScreen />
+          </Carousel.Item>
+        </Carousel>
+        <div className='slider_container'>
+          <div className='slider'></div>
+          <div className='slider'></div>
+          <div className='slider'></div>
+        </div>
+        <div>
+            <Link to='/register'>
+            <button className='prime_btn'>
+            <span className='btn_text'>ПРИСОЕДИНИТЬСЯ</span>
+          </button>
+            </Link>
 
-  return (
-    splashScreensChoise()
-  );
+        </div>
+        <div className='footer_container'>
+          <div className='footer'>Уже есть аккаунт?</div>
+          <Link to={'/login'}>Войти</Link>
+        </div>
+      </div>
+    );
+  };
+
+  return splashScreensChoise();
 };
 
-export default SplashScreens;
+export default Greeting;

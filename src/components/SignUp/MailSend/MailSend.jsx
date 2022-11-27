@@ -1,8 +1,8 @@
 import React from 'react'
-import img from '../../assets/images/SignIn/letter.png'
-import './SignInScreens.scoped.scss';
+import img from '../../../assets/images/SignIn/letter.png'
+import './MailSend.scoped.scss';
 
-const EmailScreen = () => {
+const MailSend = () => {
   return (
     <div className='signIn_container'>
       <img src={img} alt="email checked" className='email_img'/>
@@ -17,4 +17,4 @@ const EmailScreen = () => {
   );
 };
 
-export default EmailScreen;
+export default MailSend;

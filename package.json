@@ -34,6 +34,8 @@
     "react-hook-form": "^7.39.5",
     "react-material-ui-carousel": "^3.4.2",
     "react-redux": "^8.0.5",
+    "react-router": "^6.4.3",
+    "react-router-dom": "^6.4.3",
     "scoped-css-loader": "^1.0.0",
     "yup": "^0.32.11"
   },
@@ -44,6 +46,7 @@
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0",
     "babel-loader": "^9.1.0",
+    "babel-plugin-react-scoped-css": "^1.1.1",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.2",
     "eslint": "^8.27.0",

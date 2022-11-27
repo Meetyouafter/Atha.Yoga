@@ -58,10 +58,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.s?css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader", "scoped-css-loader"],
-      },
-      {
         test: /\.js|jsx$/,
         enforce: "pre",
         use: ["source-map-loader"],
@@ -85,15 +81,27 @@ module.exports = {
         exclude: /node_modules/,  //не нужно компилировать
         use: {
           loader: "babel-loader",
-          options: {
-            presets: [
-              "@babel/preset-env",
-              [
-                "@babel/preset-react"
-              ],
-            ],
-          },
         },
+      },
+      {
+        test: /\.(sc|c|sa)ss$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              importLoaders: 2,
+            },
+          },
+          // You have to put in after `css-loader` and before any `pre-precessing loader`
+          { loader: 'scoped-css-loader' },
+          {
+            loader: 'sass-loader',
+          },
+        ],
       },
     ],
   },

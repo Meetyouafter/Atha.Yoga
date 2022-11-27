@@ -26,8 +26,6 @@ export const autorizationSlice = createSlice({
       state.value += action.payload
     },
     addNewUser: (state, action) => {
-      console.log('state', state)
-      console.log('action', action)
       state.users.push(action.payload)
     }
   },

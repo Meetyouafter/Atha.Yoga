@@ -1,3 +1,22 @@
 {
-  "users": []
+  "users": [
+    {
+      "email": "anton_levus@mail.ru",
+      "password": "$2a$10$7s/ao.fxjHN5Ua03j1uie.g55iFEJBGZJspJw38XpNksAr2pApWTu",
+      "acceptTerms": true,
+      "id": 1
+    },
+    {
+      "email": "444@yu.ru",
+      "password": "$2a$10$pZiCIjy5X4324eHyLZj.9uGxeqKtAXOswjQwO5xK5EhoQ.SRBZCiK",
+      "acceptTerms": true,
+      "id": 2
+    },
+    {
+      "email": "1@mail.ru",
+      "password": "$2a$10$I1RsiS/9pr6yu41W/IhteuI258yVW15h0n.MSsoz1QP7jZ2WfUj/O",
+      "acceptTerms": true,
+      "id": 3
+    }
+  ]
 }
