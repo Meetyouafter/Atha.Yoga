@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SignUp from './SignUp/SignUp.jsx';
 import Greeting from './Greeting/Greeting.jsx';
 import { Routes, Route } from 'react-router-dom';
@@ -9,7 +9,7 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path='/' element={<Greeting />} />
+        <Route path='/' element={<SignUp />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<SignUp />} />
         <Route path='/profile' element={<Profile />} />

@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 const isProd = process.env.NODE_ENV === "production";
 const isDev = !isProd;
@@ -54,6 +55,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: filename('css')
     }),
+    new NodePolyfillPlugin()
   ],
   module: {
     rules: [

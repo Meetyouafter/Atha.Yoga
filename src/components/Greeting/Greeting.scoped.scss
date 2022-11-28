@@ -1,6 +1,47 @@
-@import '~bootstrap/scss/bootstrap';
-
 .container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.dotted {
+  justify-content: center;
+}
+
+.container2 {
+  width: 375px;
+}
+
+.container3 {
+  width: 375px;
+}
+
+.title {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 120%;
+  text-align: center;
+}
+
+.description {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 120%;
+  text-align: center;
+}
+
+
+
+
+/*
+.startPage_container {
   width: 375px;
   height: 812px;
   background-color: rgba(13, 110, 253, 1);
@@ -159,3 +200,4 @@ a {
   border: 0;
   background: rgba(117, 117, 117, 1);
 }
+*/
