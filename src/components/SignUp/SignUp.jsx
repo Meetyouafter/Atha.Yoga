@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { TextField } from '@mui/material';
+import {
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Button,
+  Divider,
+} from '@mui/material';
 import vk from './../../assets/images/SignIn/vk.png';
 import yandex from './../../assets/images/SignIn/yandex.png';
 import facebook from './../../assets/images/SignIn/facebook.png';
@@ -13,28 +19,26 @@ import MailSend from './MailSend/MailSend.jsx';
 import { Link } from 'react-router-dom';
 import './SignUp.scoped.scss';
 import Input from '../Forms/Input.jsx';
-import { values } from 'json-server-auth';
 
 const SignUp = () => {
   const users = useSelector((state) => state.autorization.users);
   const dispatch = useDispatch();
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('Email is invalid'),
+    name: Yup.string().required('Поле обязательно для заполнения'),
+    email: Yup.string()
+      .required('Поле обязательно для заполнения')
+      .email(
+        'Пожалуйста, введите действительный адрес электронной почты (например, name@yandex.ru)'
+      ),
     password: Yup.string()
-      .required('Password is required')
-      .min(6, 'Password must be at least 6 characters')
-      .max(40, 'Password must not exceed 40 characters'),
-    acceptTerms: Yup.bool().oneOf([true], 'Accept Terms is required'),
+      .required('Поле обязательно для заполнения')
+      .min(10, 'Пароль должен быть не меньше 10 символов'),
+    acceptTerms: Yup.bool().oneOf(
+      [true],
+      'Необходимо принять правила пользовательского соглашения'
+    ),
   });
-
-  const validate = () => {
-    let temp = {};
-    temp.fullname = values.fullname ? '' : 'This field is required';
-    temp.email = (/$|.+@.+..+/).test(values.email) ? '' : 'Email is incorrect';
-    temp.password = values.password.length > 4 && values.password.length < 21 ? '' : 'Password must be from 5 to 20 symbols.';
-    temp.checked = values.checked === true ? '' : 'Submit terms.';
-  }
 
   const {
     register,
@@ -61,91 +65,89 @@ const SignUp = () => {
 
   return (
     <div className='container'>
-      <h1 className='title'>Создать аккаунт</h1>
+      <div className='title'>Регистрация</div>
       <div className='body_container'>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className='register_form'
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className='register_form'>
           <div className='form-group'>
-
-
-            <Input />
-
-            <TextField 
-    hintText="Phone"
-    error ={this.state.errorText.length === 0 ? false : true }
-    floatingLabelText="Phone"
-    name="phone"
-    helperText={this.state.errorText}
-    onChange={this.onChange.bind(this)}/>
-
-
             <TextField
-              sx={{ m: 2, width: '37ch', height: '5ch' }}
+              {...register('name')}
+              className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+              id='name'
+              label='Имя *'
+              type='search'
+              size='normal'
+              margin='normal'
+              fullWidth
+            />
+            <div className='invalid-feedback'>{errors.name?.message}</div>
+          </div>
+          <div className='form-group'>
+            <TextField
               {...register('email')}
               className={`form-control ${errors.email ? 'is-invalid' : ''}`}
               id='email'
-              label='E-mail'
+              label='Электронная почта *'
               type='search'
-            />
-            <TextField
-              error
-              id='outlined-error-helper-text'
-              label='Error'
-              defaultValue='Hello World'
-              helperText='Incorrect entry.'
+              size='normal'
+              margin='normal'
+              fullWidth
             />
             <div className='invalid-feedback'>{errors.email?.message}</div>
           </div>
-
           <div className='form-group'>
             <TextField
-              sx={{ m: 2, width: '37ch', height: '5ch' }}
               {...register('password')}
               className={`form-control ${errors.password ? 'is-invalid' : ''}`}
               id='outlined-password-input'
-              label='Пароль'
+              label='Пароль *'
               type='password'
               autoComplete='current-password'
+              size='normal'
+              fullWidth
+              margin='normal'
             />
             <div className='invalid-feedback'>{errors.password?.message}</div>
           </div>
-
-          <div className='form-group form-check'>
-            <input
-              name='acceptTerms'
-              type='checkbox'
+          <div className='form-group check_item'>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  className={`form-check-input ${
+                    errors.acceptTerms ? 'is-invalid' : ''
+                  }`}
+                />
+              }
+              label='Я принимаю условия пользовательского соглашения'
               {...register('acceptTerms')}
-              className={`form-check-input ${
-                errors.acceptTerms ? 'is-invalid' : ''
-              }`}
             />
-            <span className='apply_term'>Я принимаю условия </span>
-            <a href='#'>пользовательского соглашения</a>
-
             <div className='invalid-feedback'>
               {errors.acceptTerms?.message}
             </div>
           </div>
-
-          <div className='form-group'>
-            <button type='submit' className='prime_btn'>
-              <span className='btn_text'>СОЗДАТЬ</span>
-            </button>
-          </div>
+          <Button
+            variant='contained'
+            type='submit'
+            fullWidth
+            className='prime_btn'
+            sx={{marginTop: '50px', padding: '10px'}}
+          >
+            Создать
+          </Button>
         </form>
-        <div className='footer_container'>
-          <div className='footer'>Уже есть аккаунт?</div>
+        <div className='account_container'>
+          <span>Уже есть аккаунт?</span>
           <Link to='/login'>Войти</Link>
         </div>
-        Или войти с помощью
-        <div>
-          <img src={facebook} alt='facebook' />
-          <img src={google} alt='google' />
-          <img src={yandex} alt='yandex' />
-          <img src={vk} alt='vk' />
+        <div className='footer_container'>
+          Или войти с помощью
+          <div className='img_container'>
+            <img src={facebook} alt='facebook' />
+            <img src={google} alt='google' />
+            <img src={yandex} alt='yandex' />
+            <img src={vk} alt='vk' />
+          </div>
         </div>
+        <div className='footer'>Нажимая на кнопку «Создать», я подтверждаю, что ознакомлен(а) с пользовательским соглашением</div>
       </div>
     </div>
   );
