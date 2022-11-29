@@ -7,7 +7,7 @@ import google from './../../assets/images/SignIn/google.png';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addNewUser } from '../store/autorizationSlice.js';
 import MailSend from './MailSend/MailSend.jsx';
 import { Link } from 'react-router-dom';

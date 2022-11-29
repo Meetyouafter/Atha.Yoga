@@ -16,8 +16,6 @@ const App = () => {
         <Route path='/profile' element={<Profile />} />
         <Route path="mail_send" element={<MailSend />} />
         <Route path="*" element={<Greeting />} />
-      
-        
       </Routes>
     </>
   );

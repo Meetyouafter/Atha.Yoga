@@ -5,12 +5,31 @@ import yandex from './../../assets/images/SignIn/yandex.png';
 import facebook from './../../assets/images/SignIn/facebook.png';
 import google from './../../assets/images/SignIn/google.png';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';import { useDispatch } from 'react-redux';
 import { addNewUser } from '../store/autorizationSlice.js';
+import { Link } from 'react-router-dom';
 import './Login.scoped.scss';
+
+
 
 const Login = () => {
   const dispatch = useDispatch();
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .required('Поле обязательно для заполнения'),
+    password: Yup.string()
+      .required('Поле обязательно для заполнения'),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
 
   const onSubmit = (data) => {
     console.log(JSON.stringify(data, null, 2));
@@ -27,8 +46,6 @@ const Login = () => {
     }).then((res) => res.json());
   };
 
-  const { handleSubmit, register } = useForm();
-
   return (
     <div className='container'>
       <div className='title'>Войти</div>
@@ -37,7 +54,7 @@ const Login = () => {
           <div className='form-group'>
             <TextField
               {...register('email')}
-              className='form-control'
+              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
               id='email'
               label='Электронная почта'
               type='search'
@@ -45,11 +62,12 @@ const Login = () => {
               margin='normal'
               fullWidth
             />
+              <div className='invalid-feedback'>{errors.email?.message}</div>
           </div>
           <div className='form-group'>
             <TextField
               {...register('password')}
-              className='form-control'
+              className={`form-control ${errors.password ? 'is-invalid' : ''}`}
               id='outlined-password-input'
               label='Пароль'
               type='password'
@@ -58,6 +76,7 @@ const Login = () => {
               fullWidth
               margin='normal'
             />
+              <div className='invalid-feedback'>{errors.password?.message}</div>
           </div>
           <Button
             variant='contained'
