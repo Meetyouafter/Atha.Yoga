@@ -17,6 +17,46 @@
       "password": "$2a$10$I1RsiS/9pr6yu41W/IhteuI258yVW15h0n.MSsoz1QP7jZ2WfUj/O",
       "acceptTerms": true,
       "id": 3
+    },
+    {
+      "email": "anton@anton.ru",
+      "password": "$2a$10$uMq4R9WwoM4rlTlyzuOmuueXFumqaHB74TBG9BlileJOWE0JZh6wq",
+      "name": "Anton",
+      "acceptTerms": true,
+      "id": 4
+    },
+    {
+      "email": "test1@mail.ru",
+      "password": "$2a$10$CKKILd52QPiRe9A/FjHT4.zUHt9d66kKRUZ0XuSdU4jcMMjlzsti.",
+      "name": "test",
+      "acceptTerms": true,
+      "id": 5
+    },
+    {
+      "email": "test2@mail.ru",
+      "password": "$2a$10$GFxk3gkb98DElmG9jQyi/eXoJHVLv.3uPPVlMvX1b57a/7lxpD10m",
+      "name": "test",
+      "acceptTerms": true,
+      "id": 6
+    },
+    {
+      "email": "test3@mail.ru",
+      "password": "$2a$10$V8VrmZ92aX1TiQSCywSSRezaORT7yvNDh5p97UGL7FZX7cAMdzD6q",
+      "name": "test3@mail.ru",
+      "acceptTerms": true,
+      "id": 7
+    },
+    {
+      "email": "postman@postman.ru",
+      "password": "$2a$10$gz4DrX684kwmRRbZYFhf2e46JYql0kcGIJOe/AqXIH7uMi3aUNAhq",
+      "id": 8
+    },
+    {
+      "email": "test4@mail.ru",
+      "password": "$2a$10$llBpE.xXwDL1U.Ue0QP.U.KaY.soHzEojUB6MSz734qorJfhekbQO",
+      "name": "test4@mail.ru",
+      "acceptTerms": true,
+      "id": 9
     }
   ]
 }

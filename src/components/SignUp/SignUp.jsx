@@ -10,7 +10,7 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { addNewUser } from '../store/autorizationSlice.js';
 import MailSend from './MailSend/MailSend.jsx';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './SignUp.scoped.scss';
 
 const SignUp = () => {
@@ -49,11 +49,12 @@ const SignUp = () => {
         id: data.email,
       })
     );
-    fetch('http://localhost:3000/users', {
+    fetch('http://localhost:3000/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
-    }).then((res) => res.json());
+    })
+    .then((res) => res.json())
     setMajorPage('checked');
   };
 

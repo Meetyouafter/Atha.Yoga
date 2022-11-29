@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TextField, Button } from '@mui/material';
 import vk from './../../assets/images/SignIn/vk.png';
 import yandex from './../../assets/images/SignIn/yandex.png';
@@ -7,14 +7,15 @@ import google from './../../assets/images/SignIn/google.png';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';import { useDispatch } from 'react-redux';
-import { addNewUser } from '../store/autorizationSlice.js';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Login.scoped.scss';
 
 
-
 const Login = () => {
+  const [user, setUser] = useState({})
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -32,18 +33,21 @@ const Login = () => {
   });
 
   const onSubmit = (data) => {
-    console.log(JSON.stringify(data, null, 2));
-    dispatch(
-      addNewUser({
-        ...data,
-        id: data.email,
-      })
-    );
-    fetch('http://localhost:3000/users', {
+    fetch('http://localhost:3000/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
-    }).then((res) => res.json());
+    })
+    .then((res) => res.json())
+    .then((data) => {
+   //   localStorage.setItem(JSON.stringify(data.user))
+      setUser(data.user)
+      if (data.user === undefined) {
+        return alert("Введены неверные данные") 
+      }
+      return navigate('/profile')
+
+    })
   };
 
   return (
@@ -93,8 +97,8 @@ const Login = () => {
           <div className='img_container'>
             <img src={facebook} alt='facebook' />
             <img src={google} alt='google' />
-            <img src={yandex} alt='yandex' />
-            <img src={vk} alt='vk' />
+            <img src={yandex} alt='yandex' onClick={() => console.log(localStorage)} />
+            <img src={vk} alt='vk' onClick={() => console.log(user)} />
           </div>
         </div>
       </div>
