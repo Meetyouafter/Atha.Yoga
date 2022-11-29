@@ -1,11 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {
-  TextField,
-  FormControlLabel,
-  Checkbox,
-  Button,
-  Divider,
-} from '@mui/material';
+import React, { useState } from 'react';
+import { TextField, FormControlLabel, Checkbox, Button } from '@mui/material';
 import vk from './../../assets/images/SignIn/vk.png';
 import yandex from './../../assets/images/SignIn/yandex.png';
 import facebook from './../../assets/images/SignIn/facebook.png';
@@ -18,10 +12,9 @@ import { addNewUser } from '../store/autorizationSlice.js';
 import MailSend from './MailSend/MailSend.jsx';
 import { Link } from 'react-router-dom';
 import './SignUp.scoped.scss';
-import Input from '../Forms/Input.jsx';
 
 const SignUp = () => {
-  const users = useSelector((state) => state.autorization.users);
+  const [majorPage, setMajorPage] = useState('major');
   const dispatch = useDispatch();
 
   const validationSchema = Yup.object().shape({
@@ -61,96 +54,105 @@ const SignUp = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     }).then((res) => res.json());
+    setMajorPage('checked');
   };
 
-  return (
-    <div className='container'>
-      <div className='title'>Регистрация</div>
-      <div className='body_container'>
-        <form onSubmit={handleSubmit(onSubmit)} className='register_form'>
-          <div className='form-group'>
-            <TextField
-              {...register('name')}
-              className={`form-control ${errors.name ? 'is-invalid' : ''}`}
-              id='name'
-              label='Имя *'
-              type='search'
-              size='normal'
-              margin='normal'
+  if (majorPage === 'major') {
+    return (
+      <div className='container'>
+        <div className='title'>Регистрация</div>
+        <div className='body_container'>
+          <form onSubmit={handleSubmit(onSubmit)} className='register_form'>
+            <div className='form-group'>
+              <TextField
+                {...register('name')}
+                className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                id='name'
+                label='Имя *'
+                type='search'
+                size='normal'
+                margin='normal'
+                fullWidth
+              />
+              <div className='invalid-feedback'>{errors.name?.message}</div>
+            </div>
+            <div className='form-group'>
+              <TextField
+                {...register('email')}
+                className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                id='email'
+                label='Электронная почта *'
+                type='search'
+                size='normal'
+                margin='normal'
+                fullWidth
+              />
+              <div className='invalid-feedback'>{errors.email?.message}</div>
+            </div>
+            <div className='form-group'>
+              <TextField
+                {...register('password')}
+                className={`form-control ${
+                  errors.password ? 'is-invalid' : ''
+                }`}
+                id='outlined-password-input'
+                label='Пароль *'
+                type='password'
+                autoComplete='current-password'
+                size='normal'
+                fullWidth
+                margin='normal'
+              />
+              <div className='invalid-feedback'>{errors.password?.message}</div>
+            </div>
+            <div className='form-group check_item'>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    className={`form-check-input ${
+                      errors.acceptTerms ? 'is-invalid' : ''
+                    }`}
+                  />
+                }
+                label='Я принимаю условия пользовательского соглашения'
+                {...register('acceptTerms')}
+              />
+              <div className='invalid-feedback'>
+                {errors.acceptTerms?.message}
+              </div>
+            </div>
+            <Button
+              variant='contained'
+              type='submit'
               fullWidth
-            />
-            <div className='invalid-feedback'>{errors.name?.message}</div>
+              className='prime_btn'
+              sx={{ marginTop: '50px', padding: '10px' }}
+            >
+              Создать
+            </Button>
+          </form>
+          <div className='account_container'>
+            <span>Уже есть аккаунт?</span>
+            <Link to='/login'>Войти</Link>
           </div>
-          <div className='form-group'>
-            <TextField
-              {...register('email')}
-              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-              id='email'
-              label='Электронная почта *'
-              type='search'
-              size='normal'
-              margin='normal'
-              fullWidth
-            />
-            <div className='invalid-feedback'>{errors.email?.message}</div>
-          </div>
-          <div className='form-group'>
-            <TextField
-              {...register('password')}
-              className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-              id='outlined-password-input'
-              label='Пароль *'
-              type='password'
-              autoComplete='current-password'
-              size='normal'
-              fullWidth
-              margin='normal'
-            />
-            <div className='invalid-feedback'>{errors.password?.message}</div>
-          </div>
-          <div className='form-group check_item'>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  className={`form-check-input ${
-                    errors.acceptTerms ? 'is-invalid' : ''
-                  }`}
-                />
-              }
-              label='Я принимаю условия пользовательского соглашения'
-              {...register('acceptTerms')}
-            />
-            <div className='invalid-feedback'>
-              {errors.acceptTerms?.message}
+          <div className='footer_container'>
+            Или войти с помощью
+            <div className='img_container'>
+              <img src={facebook} alt='facebook' />
+              <img src={google} alt='google' />
+              <img src={yandex} alt='yandex' />
+              <img src={vk} alt='vk' />
             </div>
           </div>
-          <Button
-            variant='contained'
-            type='submit'
-            fullWidth
-            className='prime_btn'
-            sx={{marginTop: '50px', padding: '10px'}}
-          >
-            Создать
-          </Button>
-        </form>
-        <div className='account_container'>
-          <span>Уже есть аккаунт?</span>
-          <Link to='/login'>Войти</Link>
-        </div>
-        <div className='footer_container'>
-          Или войти с помощью
-          <div className='img_container'>
-            <img src={facebook} alt='facebook' />
-            <img src={google} alt='google' />
-            <img src={yandex} alt='yandex' />
-            <img src={vk} alt='vk' />
+          <div className='footer'>
+            Нажимая на кнопку «Создать», я подтверждаю, что ознакомлен(а) с
+            пользовательским соглашением
           </div>
         </div>
-        <div className='footer'>Нажимая на кнопку «Создать», я подтверждаю, что ознакомлен(а) с пользовательским соглашением</div>
       </div>
-    </div>
-  );
+    );
+  }
+  return <MailSend />;
 };
 
 export default SignUp;

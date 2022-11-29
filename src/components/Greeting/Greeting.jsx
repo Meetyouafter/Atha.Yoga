@@ -4,14 +4,12 @@ import firstImg from './../../assets/images/SplashScreens/firstPage.png';
 import secondImg from './../../assets/images/SplashScreens/secondPage.png';
 import thirdImg from './../../assets/images/SplashScreens/thirdPage.png';
 import Logo from './Logo/Logo.jsx';
-
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MobileStepper from '@mui/material/MobileStepper';
 import SwipeableViews from 'react-swipeable-views-react-18-fix/lib/SwipeableViews';
 import { autoPlay } from 'react-swipeable-views-utils';
-import { Paper, Button } from '@mui/material';
-
+import { Paper, Button, Typography } from '@mui/material';
 import './Greeting.scoped.scss';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -55,69 +53,155 @@ const Greeting = () => {
       [];
   });
 
-  const onRegister = () => {
-    window.location.assign('http://localhost:3000/second/');
-  };
-
-  function Item(props) {
-    return (
-      <Paper>
-        <h2>{props.item.name}</h2>
-        <p>{props.item.description}</p>
-
-        <Button className='CheckButton'>Check it out!</Button>
-      </Paper>
-    );
-  }
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
   const splashScreensChoise = () => {
     if (onStartPage === 'on') {
       return <Logo onClick={onHideLogo} />;
     }
     return (
-      <div className='container'>
-        <Box sx={{ maxWidth: 375, flexGrow: 1 }}>
-          <AutoPlaySwipeableViews
-            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-            index={activeStep}
-            onChangeIndex={handleStepChange}
-            enableMouseEvents
-          >
-            {items.map((step, index) => (
-              <>
-                <p className='title'>{step.title}</p>
-                <p className='description'>{step.description}</p>
-                <div key={step.label} className='container2'>
-                  {Math.abs(activeStep - index) <= 2 ? (
-                    <img src={step.img} alt={step.description} />
-                  ) : null}
-                </div>
-              </>
-            ))}
-          </AutoPlaySwipeableViews>
-          <MobileStepper
-            steps={maxSteps}
-            position='static'
-            activeStep={activeStep}
-            className='dotted'
-          />
-          <Link to='/register'>
-            <Button variant='contained'>Присоединиться</Button>
+      <AutoPlaySwipeableViews>
+        {items.map((item, index) => (
+          <div key={index}>
+            <p>{item.title}</p>
+            <p>{item.description}</p>
+            <img src={item.img} />
+          </div>
+        ))}
+    </AutoPlaySwipeableViews>
+    /*
+      <Box sx={{
+        flexGrow: 1, 
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100wv',
+        height: '100hv',
+        position: 'absolute',
+        margin: '0 auto',
+        left: 0,
+        right: 0,
+        top: '50%',
+        transform: 'translate(0, -50%)',
+        }}>
+      <Paper
+        square
+        elevation={0}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          height: 50,
+          pl: 2,
+          bgcolor: 'background.default',
+        }}
+      >
+        <Typography>{items[activeStep].title}</Typography>
+      </Paper>
+      <AutoPlaySwipeableViews
+        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        index={activeStep}
+        onChangeIndex={handleStepChange}
+        enableMouseEvents
+      >
+        {items.map((item, index) => (
+          <div key={index}>
+            {Math.abs(activeStep - index) <= 2 ? (
+              <Box
+                component="img"
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  overflow: 'hidden',
+                  width: '100%',
+                }}
+                src={item.img}
+                alt={item.description}
+              />
+            ) : null}
+          </div>
+        ))}
+      </AutoPlaySwipeableViews>
+      <MobileStepper
+        steps={maxSteps}
+        position="static"
+        activeStep={activeStep}
+      />
+    </Box>
+    */
+
+
+
+
+
+
+
+      /*
+      <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
+      <Paper
+        square
+        elevation={0}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          height: 50,
+          pl: 2,
+          bgcolor: 'background.default',
+        }}
+      >
+        <Typography>{items[activeStep].title}</Typography>
+        <Typography>{items[activeStep].description}</Typography>
+      </Paper>
+      <AutoPlaySwipeableViews
+        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        index={activeStep}
+        onChangeIndex={handleStepChange}
+        enableMouseEvents
+      >
+        {items.map((item, index) => (
+          <div key={index}>
+            {Math.abs(activeStep - index) <= 2 ? (
+              <Box
+                component="img"
+                sx={{
+                  height: 255,
+                  display: 'block',
+                  maxWidth: 400,
+                  overflow: 'hidden',
+                  width: '100%',
+                }}
+                src={item.img}
+                alt={item.description}
+              />
+            ) : null}
+          </div>
+        ))}
+      </AutoPlaySwipeableViews>
+      <MobileStepper
+        steps={maxSteps}
+        position="static"
+        activeStep={activeStep}
+      />
+        <Link to='/register'>
+            <Button
+              variant='contained'
+              type='submit'
+              fullWidth
+              className='prime_btn'
+              sx={{ marginTop: '50px', padding: '10px' }}
+            >
+              Войти
+            </Button>
           </Link>
           <div className='footer_container'>
             <div className='footer'>Уже есть аккаунт?</div>
             <Link to='/login'>Войти</Link>
           </div>
+        <div className='container'>
+          <div className='title'>Войти</div>
+          <div className='body_container'></div>
+        </div>
         </Box>
-      </div>
+*/
     );
   };
 
