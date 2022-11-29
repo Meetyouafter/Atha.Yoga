@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
-import { TextField, FormControlLabel, Checkbox, Button } from '@mui/material';
+import React from 'react';
+import { TextField, Button } from '@mui/material';
 import vk from './../../assets/images/SignIn/vk.png';
 import yandex from './../../assets/images/SignIn/yandex.png';
 import facebook from './../../assets/images/SignIn/facebook.png';
 import google from './../../assets/images/SignIn/google.png';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addNewUser } from '../store/autorizationSlice.js';
-import { Link } from 'react-router-dom';
 import './Login.scoped.scss';
 
 const Login = () => {
