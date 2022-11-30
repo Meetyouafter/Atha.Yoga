@@ -7,15 +7,12 @@ import google from './../../assets/images/SignIn/google.png';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
-import { addNewUser } from '../store/autorizationSlice.js';
 import MailSend from './MailSend/MailSend.jsx';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './SignUp.scoped.scss';
 
 const SignUp = () => {
   const [majorPage, setMajorPage] = useState('major');
-  const dispatch = useDispatch();
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Поле обязательно для заполнения'),
@@ -43,12 +40,6 @@ const SignUp = () => {
 
   const onSubmit = (data) => {
     console.log(JSON.stringify(data, null, 2));
-    dispatch(
-      addNewUser({
-        ...data,
-        id: data.email,
-      })
-    );
     fetch('http://localhost:3000/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

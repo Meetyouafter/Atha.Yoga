@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { TextField, Button } from '@mui/material';
 import vk from './../../assets/images/SignIn/vk.png';
 import yandex from './../../assets/images/SignIn/yandex.png';
@@ -6,14 +6,15 @@ import facebook from './../../assets/images/SignIn/facebook.png';
 import google from './../../assets/images/SignIn/google.png';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';import { useDispatch } from 'react-redux';
+import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUserData } from '../../../store/initialSlice';
 import './Login.scoped.scss';
 
-
 const Login = () => {
-  const [user, setUser] = useState({})
   const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
 
   const navigate = useNavigate();
 
@@ -41,12 +42,12 @@ const Login = () => {
     .then((res) => res.json())
     .then((data) => {
    //   localStorage.setItem(JSON.stringify(data.user))
-      setUser(data.user)
+   //   setUser(data.user)
+      dispatch(getUserData(data))
       if (data.user === undefined) {
         return alert("Введены неверные данные") 
       }
       return navigate('/profile')
-
     })
   };
 
