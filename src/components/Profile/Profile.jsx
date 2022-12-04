@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './Profile.scoped.scss';
 
 const Profile = () => {
-  const userData = useSelector(state => state.initial.user);
+  const userData = useSelector(state => state.user.user);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,12 +16,10 @@ const Profile = () => {
   return (
     <div className="container">
       <div>
-        Hello,
-        {userData.name}
+        {`Hello, ${userData.name}`}
       </div>
       <div>
-        Your email is
-        {userData.email}
+        {`Your email is ${userData.email}`}
       </div>
     </div>
   );

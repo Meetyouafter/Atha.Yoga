@@ -17,7 +17,7 @@ import google from '../../assets/images/SignIn/google.png';
 import './SignUp.scoped.scss';
 
 const SignUp = () => {
-  const [majorPage, setMajorPage] = useState('major');
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Поле обязательно для заполнения'),
@@ -47,11 +47,12 @@ const SignUp = () => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
-    }).then(res => res.json());
-    setMajorPage('checked');
+    })
+      .then(res => res.json())
+      .then(() => setIsSuccess(true));
   };
 
-  if (majorPage === 'major') {
+  if (!isSuccess) {
     return (
       <div className="container">
         <div className="title">Регистрация</div>

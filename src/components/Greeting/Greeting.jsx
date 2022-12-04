@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views-react-18-fix';
 import { autoPlay } from 'react-swipeable-views-utils';
@@ -32,7 +32,7 @@ const items = [
 ];
 
 const Greeting = () => {
-  const [onStartPage, setOnStartPage] = useState('on');
+  const [isLogo, setIsLogo] = useState(true);
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = items.length;
 
@@ -40,19 +40,15 @@ const Greeting = () => {
     setActiveStep(step);
   };
 
-  const onHideLogo = () => setOnStartPage('hidden');
-  /*
   useEffect(() => {
     setTimeout(() => {
-      setOnStartPage('hidden');
-    }, 5000),
-      [];
-  });
-  */
+      setIsLogo(false);
+    }, 5000);
+  }, []);
 
-  const splashScreensChoise = () => {
-    if (onStartPage === 'on') {
-      return <Logo onClick={onHideLogo} />;
+  const splashScreensChoice = () => {
+    if (isLogo) {
+      return <Logo onClick={() => setIsLogo(false)} />;
     }
     return (
       <div className="container">
@@ -80,9 +76,6 @@ const Greeting = () => {
         >
           <Button
             variant="contained"
-            type="submit"
-            className="prime_btn"
-            fullWidth
             sx={{ marginTop: '50px', padding: '10px' }}
           >
             Присоединиться
@@ -96,7 +89,7 @@ const Greeting = () => {
     );
   };
 
-  return splashScreensChoise();
+  return splashScreensChoice();
 };
 
 export default Greeting;

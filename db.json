@@ -57,6 +57,13 @@
       "name": "test4@mail.ru",
       "acceptTerms": true,
       "id": 9
+    },
+    {
+      "email": "test5@mail.ru",
+      "password": "$2a$10$iUHgzVYMffxKpw4KCgmsouu0BcQntm5AHJ4zIuvFgISwC8DbrkriW",
+      "name": "test5@mail.ru",
+      "acceptTerms": true,
+      "id": 10
     }
   ]
 }
