@@ -70,17 +70,14 @@ const Greeting = () => {
           position="static"
           activeStep={activeStep}
         />
-        <Link
+        <Button
+          component={Link}
           to="/register"
-          style={{ textDecoration: 'none', width: '100%', maxWidth: '300px' }}
+          variant="contained"
+          sx={{ marginTop: '50px', padding: '10px' }}
         >
-          <Button
-            variant="contained"
-            sx={{ marginTop: '50px', padding: '10px' }}
-          >
-            Присоединиться
-          </Button>
-        </Link>
+          Присоединиться
+        </Button>
         <div className="account_container">
           <span>Уже есть аккаунт?</span>
           <Link to="/login">Войти</Link>

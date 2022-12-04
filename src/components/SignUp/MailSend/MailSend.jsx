@@ -14,16 +14,16 @@ const MailSend = () => (
     <a href="/" className="link">
       отправьте письмо еще раз
     </a>
-    <Link to="/login" style={{ textDecoration: 'none' }}>
-      <Button
-        variant="contained"
-        type="submit"
-        className="prime_btn"
-        sx={{ marginTop: '50px', padding: '10px' }}
-      >
-        Продолжить
-      </Button>
-    </Link>
+    <Button
+      component={Link}
+      to="/login"
+      variant="contained"
+      type="submit"
+      className="prime_btn"
+      sx={{ marginTop: '50px', padding: '10px' }}
+    >
+      Продолжить
+    </Button>
   </div>
 );
 
