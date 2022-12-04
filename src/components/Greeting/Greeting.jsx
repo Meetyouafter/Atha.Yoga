@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import firstImg from './../../assets/images/SplashScreens/firstPage.png';
-import secondImg from './../../assets/images/SplashScreens/secondPage.png';
-import thirdImg from './../../assets/images/SplashScreens/thirdPage.png';
-import Logo from './Logo/Logo.jsx';
-import { useTheme } from '@mui/material/styles';
-import SwipeableViews from 'react-swipeable-views-react-18-fix/lib/SwipeableViews';
+import SwipeableViews from 'react-swipeable-views-react-18-fix';
 import { autoPlay } from 'react-swipeable-views-utils';
 import { MobileStepper, Button } from '@mui/material';
+import firstImg from '../../assets/images/SplashScreens/firstPage.png';
+import secondImg from '../../assets/images/SplashScreens/secondPage.png';
+import thirdImg from '../../assets/images/SplashScreens/thirdPage.png';
+import Logo from './Logo/Logo';
 import './Greeting.scoped.scss';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -37,60 +36,61 @@ const Greeting = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = items.length;
 
-  const handleStepChange = (step) => {
+  const handleStepChange = step => {
     setActiveStep(step);
   };
 
   const onHideLogo = () => setOnStartPage('hidden');
-
+  /*
   useEffect(() => {
     setTimeout(() => {
       setOnStartPage('hidden');
     }, 5000),
       [];
   });
+  */
 
   const splashScreensChoise = () => {
     if (onStartPage === 'on') {
       return <Logo onClick={onHideLogo} />;
     }
     return (
-      <div className='container'>
+      <div className="container">
         <AutoPlaySwipeableViews
           index={activeStep}
           onChangeIndex={handleStepChange}
           style={{ width: '100%', maxWidth: '380px' }}
         >
-          {items.map((item, index) => (
-            <div key={index} className='body_container'>
-              <div className='title'>{item.title}</div>
-              <div className='description'>{item.description}</div>
-              <img src={item.img} />
+          {items.map(item => (
+            <div key={item.description} className="body_container">
+              <div className="title">{item.title}</div>
+              <div className="description">{item.description}</div>
+              <img src={item.img} alt="sportsman" />
             </div>
           ))}
         </AutoPlaySwipeableViews>
         <MobileStepper
           steps={maxSteps}
-          position='static'
+          position="static"
           activeStep={activeStep}
         />
         <Link
-          to='/register'
+          to="/register"
           style={{ textDecoration: 'none', width: '100%', maxWidth: '300px' }}
         >
           <Button
-            variant='contained'
-            type='submit'
-            className='prime_btn'
+            variant="contained"
+            type="submit"
+            className="prime_btn"
             fullWidth
             sx={{ marginTop: '50px', padding: '10px' }}
           >
             Присоединиться
           </Button>
         </Link>
-        <div className='account_container'>
+        <div className="account_container">
           <span>Уже есть аккаунт?</span>
-          <Link to='/login'>Войти</Link>
+          <Link to="/login">Войти</Link>
         </div>
       </div>
     );

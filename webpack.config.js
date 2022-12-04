@@ -1,45 +1,45 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const TerserWebpackPlugin = require("terser-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
-const isProd = process.env.NODE_ENV === "production";
+const isProd = process.env.NODE_ENV === 'production';
 const isDev = !isProd;
 
-const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`
+const filename = ext => (isDev ? `[name].${ext}` : `[name].[hash].${ext}`);
 
 const optimization = () => {
   const config = {
-    minimize: true,
+  //  minimize: true,
     splitChunks: {
-      chunks: 'all'
-    }
-  }
+      chunks: 'all',
+    },
+  };
   if (isProd) {
-    config.minimizer = [
-      new TerserWebpackPlugin(),
-      new MiniCssExtractPlugin()
-    ]
+    config.minimize = [new TerserWebpackPlugin(), new MiniCssExtractPlugin()];
   }
   return config;
-}
+};
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
-  mode: "development",
-  target: "web",
-  entry: "./index.jsx",
-  devtool: isDev ? 'source-map' : "eval-source-map",
+  mode: 'development',
+  target: 'web',
+  entry: './index.jsx',
+  devtool: isDev ? 'source-map' : 'eval-source-map',
+  resolve: {
+    extensions: ['.js', '.jsx', '.png', '.jpg'],
+  },
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, 'dist'),
     filename: filename('js'),
     clean: true,
-    publicPath: "/",
+    publicPath: '/',
   },
   optimization: optimization(),
   devServer: {
-    static: "./dist",
+    static: './dist',
     hot: isDev,
     port: 8080,
     open: true,
@@ -47,43 +47,43 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Output Management",
-      template: "index.html",
+      title: 'Output Management',
+      template: 'index.html',
       minify: {
-        collapseWhitespace: isProd
-      }
+        collapseWhitespace: isProd,
+      },
     }),
     new MiniCssExtractPlugin({
-      filename: filename('css')
+      filename: filename('css'),
     }),
-    new NodePolyfillPlugin()
+    new NodePolyfillPlugin(),
   ],
   module: {
     rules: [
       {
         test: /\.js|jsx$/,
-        enforce: "pre",
-        use: ["source-map-loader"],
+        enforce: 'pre',
+        use: ['source-map-loader'],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
-        type: "asset/resource",
+        type: 'asset/resource',
         generator: {
-          filename: "assets/images/[name].[ext]",
+          filename: 'assets/images/[name].[ext]',
         },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: "asset/resource",
+        type: 'asset/resource',
         generator: {
-          filename: "assets/fonts/[name].[ext]",
+          filename: 'assets/fonts/[name].[ext]',
         },
       },
       {
-        test: /\.[jt]sx?$/, 
-        exclude: /node_modules/,  //не нужно компилировать
+        test: /\.[jt]sx?$/,
+        exclude: /node_modules/, // не нужно компилировать
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
         },
       },
       {
@@ -99,7 +99,6 @@ module.exports = {
               importLoaders: 2,
             },
           },
-          // You have to put in after `css-loader` and before any `pre-precessing loader`
           { loader: 'scoped-css-loader' },
           {
             loader: 'sass-loader',
