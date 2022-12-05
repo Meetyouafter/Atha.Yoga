@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views-react-18-fix';
 import { autoPlay } from 'react-swipeable-views-utils';
-import { MobileStepper, Button } from '@mui/material';
-import firstImg from '../../assets/images/SplashScreens/firstPage.png';
-import secondImg from '../../assets/images/SplashScreens/secondPage.png';
-import thirdImg from '../../assets/images/SplashScreens/thirdPage.png';
+import {
+  Button,
+  Typography,
+  Box,
+  Stack,
+  Container,
+} from '@mui/material';
+import firstImg from '../../assets/images/greeting/firstPage.png';
+import secondImg from '../../assets/images/greeting/secondPage.png';
+import thirdImg from '../../assets/images/greeting/thirdPage.png';
 import Logo from './Logo/Logo';
-import './Greeting.scoped.scss';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -33,8 +38,7 @@ const items = [
 
 const Greeting = () => {
   const [isLogo, setIsLogo] = useState(true);
-  const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = items.length;
+  const [activeStep, setActiveStep] = useState(0);
 
   const handleStepChange = step => {
     setActiveStep(step);
@@ -43,7 +47,7 @@ const Greeting = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsLogo(false);
-    }, 5000);
+    }, 3000);
   }, []);
 
   const splashScreensChoice = () => {
@@ -51,38 +55,44 @@ const Greeting = () => {
       return <Logo onClick={() => setIsLogo(false)} />;
     }
     return (
-      <div className="container">
-        <AutoPlaySwipeableViews
-          index={activeStep}
-          onChangeIndex={handleStepChange}
-          style={{ width: '100%', maxWidth: '380px' }}
+      <Container
+        maxWidth="sm"
+      >
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="100vh"
+          flexDirection="column"
         >
-          {items.map(item => (
-            <div key={item.description} className="body_container">
-              <div className="title">{item.title}</div>
-              <div className="description">{item.description}</div>
-              <img src={item.img} alt="sportsman" />
-            </div>
-          ))}
-        </AutoPlaySwipeableViews>
-        <MobileStepper
-          steps={maxSteps}
-          position="static"
-          activeStep={activeStep}
-        />
-        <Button
-          component={Link}
-          to="/register"
-          variant="contained"
-          sx={{ marginTop: '50px', padding: '10px' }}
-        >
-          Присоединиться
-        </Button>
-        <div className="account_container">
-          <span>Уже есть аккаунт?</span>
-          <Link to="/login">Войти</Link>
-        </div>
-      </div>
+          <AutoPlaySwipeableViews
+            index={activeStep}
+            onChangeIndex={handleStepChange}
+            style={{ width: '100%', maxWidth: '380px' }}
+          >
+            {items.map(item => (
+              <React.Fragment key={item.description}>
+                <Typography variant="h2" sx={{ textAlign: 'center', paddingBottom: '10px' }}>{item.title}</Typography>
+                <Typography variant="h3" sx={{ textAlign: 'center', paddingBottom: '20px' }}>{item.description}</Typography>
+                <img src={item.img} alt="sportsman" />
+              </React.Fragment>
+            ))}
+          </AutoPlaySwipeableViews>
+          <Button
+            component={Link}
+            to="/register"
+            variant="contained"
+            size="large"
+            sx={{ marginTop: '80px', marginBottom: '20px', width: '70%' }}
+          >
+            Присоединиться
+          </Button>
+          <Stack direction="row" spacing={2}>
+            <Typography varinat="subtitle1">Уже есть аккаунт?</Typography>
+            <Typography varinat="subtitle2" component={Link} to="/login">Войти</Typography>
+          </Stack>
+        </Box>
+      </Container>
     );
   };
 
