@@ -19,7 +19,6 @@ const theme = createTheme({
     fontWeight: 500,
     fontSize: '16px',
     lineHeight: '26px',
-    color: '#FFFFFF',
   },
 });
 

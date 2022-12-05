@@ -8,6 +8,7 @@ import {
   Box,
   Stack,
   Container,
+  MobileStepper,
 } from '@mui/material';
 import firstImg from '../../assets/images/greeting/firstPage.png';
 import secondImg from '../../assets/images/greeting/secondPage.png';
@@ -39,6 +40,7 @@ const items = [
 const Greeting = () => {
   const [isLogo, setIsLogo] = useState(true);
   const [activeStep, setActiveStep] = useState(0);
+  const maxSteps = items.length;
 
   const handleStepChange = step => {
     setActiveStep(step);
@@ -55,9 +57,7 @@ const Greeting = () => {
       return <Logo onClick={() => setIsLogo(false)} />;
     }
     return (
-      <Container
-        maxWidth="sm"
-      >
+      <Container maxWidth="sm">
         <Box
           display="flex"
           justifyContent="center"
@@ -78,12 +78,18 @@ const Greeting = () => {
               </React.Fragment>
             ))}
           </AutoPlaySwipeableViews>
+          <MobileStepper
+            steps={maxSteps}
+            position="static"
+            activeStep={activeStep}
+            sx={{ paddingTop: '20px' }}
+          />
           <Button
             component={Link}
             to="/register"
             variant="contained"
             size="large"
-            sx={{ marginTop: '80px', marginBottom: '20px', width: '70%' }}
+            sx={{ marginTop: '70px', marginBottom: '20px', width: '70%' }}
           >
             Присоединиться
           </Button>

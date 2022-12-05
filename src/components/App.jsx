@@ -4,7 +4,7 @@ import SignUp from './SignUp/SignUp';
 import Greeting from './Greeting/Greeting';
 import Profile from './Profile/Profile';
 import Login from './Login/Login';
-import MailSend from './SignUp/MailSend/MailSend';
+import MailSend from './SignUp/MailSend';
 
 const App = () => (
   <Routes>

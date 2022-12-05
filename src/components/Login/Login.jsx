@@ -1,16 +1,17 @@
 import React from 'react';
-import { TextField, Button } from '@mui/material';
+import {
+  TextField,
+  Button,
+  Typography,
+  Container,
+  FormGroup,
+} from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getUserData } from '../../store/userSlice';
-import vk from '../../assets/images/SignIn/vk.png';
-import yandex from '../../assets/images/SignIn/yandex.png';
-import facebook from '../../assets/images/SignIn/facebook.png';
-import google from '../../assets/images/SignIn/google.png';
-import './Login.scoped.scss';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -50,58 +51,47 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      <div className="title">Войти</div>
-      <div className="body_container">
-        <form className="register_form" onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-group">
-            <TextField
-              {...register('email')}
-              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-              id="email"
-              label="Электронная почта"
-              type="search"
-              size="normal"
-              margin="normal"
-              fullWidth
-            />
-            <div className="invalid-feedback">{errors.email?.message}</div>
-          </div>
-          <div className="form-group">
-            <TextField
-              {...register('password')}
-              className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-              id="outlined-password-input"
-              label="Пароль"
-              type="password"
-              autoComplete="current-password"
-              size="normal"
-              fullWidth
-              margin="normal"
-            />
-            <div className="invalid-feedback">{errors.password?.message}</div>
-          </div>
-          <Button
-            variant="contained"
-            type="submit"
-            fullWidth
-            className="prime_btn"
-            sx={{ marginTop: '50px', padding: '10px' }}
-          >
-            Войти
-          </Button>
-        </form>
-        <div className="footer_container">
-          Или войти с помощью
-          <div className="img_container">
-            <img src={facebook} alt="facebook" />
-            <img src={google} alt="google" />
-            <img src={yandex} alt="yandex" />
-            <img src={vk} alt="vk" />
-          </div>
-        </div>
-      </div>
-    </div>
+    <Container maxWidth="sm">
+      <Typography variant="h2" sx={{ textAlign: 'center', paddingBottom: '30px' }}>Войти</Typography>
+      <FormGroup
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: 'column',
+          minHeight: '100vh',
+        }}
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <TextField
+          id="email"
+          label="E-mail"
+          size="normal"
+          margin="normal"
+          fullWidth
+        />
+        <TextField
+          id="password"
+          label="Пароль"
+          type="password"
+          size="normal"
+          margin="normal"
+          fullWidth
+        />
+        <Button
+          variant="contained"
+          type="submit"
+          size="large"
+          sx={{
+            marginTop: '50px',
+            marginBottom: '20px',
+            padding: '15px',
+            width: '70%',
+          }}
+        >
+          Войти
+        </Button>
+      </FormGroup>
+    </Container>
   );
 };
 

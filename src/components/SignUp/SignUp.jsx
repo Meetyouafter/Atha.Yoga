@@ -4,20 +4,19 @@ import {
   FormControlLabel,
   Checkbox,
   Button,
+  Typography,
+  Container,
+  Stack,
+  FormGroup,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import MailSend from './MailSend/MailSend';
-import vk from '../../assets/images/SignIn/vk.png';
-import yandex from '../../assets/images/SignIn/yandex.png';
-import facebook from '../../assets/images/SignIn/facebook.png';
-import google from '../../assets/images/SignIn/google.png';
-import './SignUp.scoped.scss';
+import MailSend from './MailSend';
 
 const SignUp = () => {
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(true);
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Поле обязательно для заполнения'),
@@ -54,97 +53,58 @@ const SignUp = () => {
 
   if (!isSuccess) {
     return (
-      <div className="container">
-        <div className="title">Регистрация</div>
-        <div className="body_container">
-          <form onSubmit={handleSubmit(onSubmit)} className="register_form">
-            <div className="form-group">
-              <TextField
-                {...register('name')}
-                className={`form-control ${errors.name ? 'is-invalid' : ''}`}
-                id="name"
-                label="Имя *"
-                type="search"
-                size="normal"
-                margin="normal"
-                fullWidth
-              />
-              <div className="invalid-feedback">{errors.name?.message}</div>
-            </div>
-            <div className="form-group">
-              <TextField
-                {...register('email')}
-                className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                id="email"
-                label="Электронная почта *"
-                type="search"
-                size="normal"
-                margin="normal"
-                fullWidth
-              />
-              <div className="invalid-feedback">{errors.email?.message}</div>
-            </div>
-            <div className="form-group">
-              <TextField
-                {...register('password')}
-                className={`form-control ${
-                  errors.password ? 'is-invalid' : ''
-                }`}
-                id="outlined-password-input"
-                label="Пароль *"
-                type="password"
-                autoComplete="current-password"
-                size="normal"
-                fullWidth
-                margin="normal"
-              />
-              <div className="invalid-feedback">{errors.password?.message}</div>
-            </div>
-            <div className="form-group check_item">
-              <FormControlLabel
-                control={(
-                  <Checkbox
-                    className={`form-check-input ${
-                      errors.acceptTerms ? 'is-invalid' : ''
-                    }`}
-                  />
-                )}
-                label="Я принимаю условия пользовательского соглашения"
-                {...register('acceptTerms')}
-              />
-              <div className="invalid-feedback">
-                {errors.acceptTerms?.message}
-              </div>
-            </div>
-            <Button
-              variant="contained"
-              type="submit"
-              fullWidth
-              className="prime_btn"
-              sx={{ marginTop: '50px', padding: '10px' }}
-            >
-              Создать
-            </Button>
-          </form>
-          <div className="account_container">
-            <span>Уже есть аккаунт?</span>
-            <Link to="/login">Войти</Link>
-          </div>
-          <div className="footer_container">
-            Или войти с помощью
-            <div className="img_container">
-              <img src={facebook} alt="facebook" />
-              <img src={google} alt="google" />
-              <img src={yandex} alt="yandex" />
-              <img src={vk} alt="vk" />
-            </div>
-          </div>
-          <div className="footer">
-            Нажимая на кнопку «Создать», я подтверждаю, что ознакомлен(а) с
-            пользовательским соглашением
-          </div>
-        </div>
-      </div>
+      <Container maxWidth="sm">
+        <Typography variant="h2" sx={{ textAlign: 'center', paddingBottom: '30px' }}>Создать аккаунт</Typography>
+        <FormGroup
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="column"
+          minHeight="100vh"
+          sx={{
+            border: '1px solid #E0E0E0',
+            borderRadius: '4px',
+            padding: '20px',
+          }}
+        >
+          <TextField
+            id="name"
+            label="Имя"
+            size="normal"
+            margin="normal"
+            fullWidth
+          />
+          <TextField
+            id="email"
+            label="E-mail"
+            size="normal"
+            margin="normal"
+            fullWidth
+          />
+          <TextField
+            id="password"
+            label="Пароль"
+            type="password"
+            size="normal"
+            margin="normal"
+            fullWidth
+          />
+          <FormControlLabel control={<Checkbox />} label="Я согласен получать рассылку" />
+          <FormControlLabel control={<Checkbox />} label="Я принимаю условия пользовательского соглашения" />
+          <Button
+            variant="contained"
+            type="submit"
+            size="large"
+            sx={{ marginTop: '50px', marginBottom: '20px', padding: '15px' }}
+          >
+            Создать
+          </Button>
+          <Stack direction="row" spacing={2} sx={{ justifyContent: 'center' }}>
+            <Typography varinat="subtitle1">Уже есть аккаунт?</Typography>
+            <Typography varinat="subtitle2" component={Link} to="/login">Войти</Typography>
+          </Stack>
+        </FormGroup>
+      </Container>
     );
   }
   return <MailSend />;

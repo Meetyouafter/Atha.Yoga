@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import './Profile.scoped.scss';
+import {
+  Box,
+  Typography,
+  Container,
+} from '@mui/material';
 
 const Profile = () => {
   const userData = useSelector(state => state.user.user);
@@ -14,14 +18,18 @@ const Profile = () => {
   });
 
   return (
-    <div className="container">
-      <div>
-        {`Hello, ${userData.name}`}
-      </div>
-      <div>
-        {`Your email is ${userData.email}`}
-      </div>
-    </div>
+    <Container component="main" maxWidth="sm">
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Typography variant="h2" sx={{ textAlign: 'center' }}>{`Hello, ${userData.name}`}</Typography>
+        <Typography variant="h2" sx={{ textAlign: 'center' }}>{`Your email is ${userData.email}`}</Typography>
+      </Box>
+    </Container>
   );
 };
 
