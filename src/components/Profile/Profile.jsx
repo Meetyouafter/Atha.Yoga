@@ -2,9 +2,8 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
-  Box,
   Typography,
-  Container,
+  Grid,
 } from '@mui/material';
 
 const Profile = () => {
@@ -18,18 +17,16 @@ const Profile = () => {
   });
 
   return (
-    <Container component="main" maxWidth="sm">
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Typography variant="h2" sx={{ textAlign: 'center' }}>{`Hello, ${userData.name}`}</Typography>
-        <Typography variant="h2" sx={{ textAlign: 'center' }}>{`Your email is ${userData.email}`}</Typography>
-      </Box>
-    </Container>
+    <Grid
+      container
+      alignItems="center"
+      justifyContent="center"
+      direction="column"
+      sx={{ minHeight: '100vh' }}
+    >
+      <Grid item><Typography variant="h2" sx={{ textAlign: 'center' }}>{`Hello, ${userData.name}`}</Typography></Grid>
+      <Grid item><Typography variant="h2" sx={{ textAlign: 'center' }}>{`Your email is ${userData.email}`}</Typography></Grid>
+    </Grid>
   );
 };
 

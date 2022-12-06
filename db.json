@@ -64,6 +64,14 @@
       "name": "test5@mail.ru",
       "acceptTerms": true,
       "id": 10
+    },
+    {
+      "email": "test8@mail.ru",
+      "password": "$2a$10$HKt87BkGsE7igNe.Md20s.N.FCCwk31OP/7Rq1Q/n23V7zDAeDmpm",
+      "name": "test8@mail.ru",
+      "mailDelivery": true,
+      "acceptTerms": true,
+      "id": 11
     }
   ]
 }

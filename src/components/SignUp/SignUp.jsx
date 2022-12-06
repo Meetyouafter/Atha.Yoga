@@ -17,7 +17,7 @@ import MailSend from './MailSend';
 import './SignUp.scoped.scss';
 
 const SignUp = () => {
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(true);
 
   const {
     register,
