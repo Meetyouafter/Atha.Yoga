@@ -7,21 +7,33 @@
 .MuiMenuItem-root:hover  {
   background: #0D6EFD;
   color: white;
-}
 
-.MuiMenuItem-root:hover .MuiListItemIcon-root  {
+  .MuiListItemIcon-root  {
     color: white;
   }
+}
 
 .MuiListItemIcon-root  {
     padding-right: 15px;  
 }
 
-.avatar_img {
-    height: 100px;
+.notifications_box  {
+  color: gray;
+  display: flex;
+  justify-content: end;
+  column-gap: 15px;
+  padding-right: 30px;
+}
+
+.display_none {
+  display: none;
 }
 
 .logo_img {
-    margin-top: 10px;
     margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.backgroung_img {
+  height: 100%;
 }

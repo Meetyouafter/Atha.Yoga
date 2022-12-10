@@ -38,6 +38,22 @@ theme.typography.h3 = {
   color: '#616161',
 };
 
+theme.typography.h4 = {
+  fontFamily: 'Inter',
+  fontWeight: 600,
+  fontSize: '18px',
+  lineHeight: '120%',
+};
+
+theme.typography.h5 = {
+  fontFamily: 'Inter',
+  fontStyle: 'normal',
+  fontWeight: 400,
+  fontSize: '14px',
+  lineHeight: '120%',
+  color: '#6C757D',
+};
+
 theme.typography.subtitle1 = {
   fontFamily: 'Roboto',
   fontWeight: 400,
@@ -50,6 +66,15 @@ theme.typography.subtitle2 = {
   fontFamily: 'Roboto',
   fontWeight: 400,
   fontSize: '14px',
+  lineHeight: '120%',
+  color: '#0D6EFD',
+};
+
+theme.typography.body2 = {
+  fontFamily: 'Roboto',
+  fontStyle: 'normal',
+  fontWeight: 500,
+  fontSize: '18px',
   lineHeight: '120%',
   color: '#0D6EFD',
 };
