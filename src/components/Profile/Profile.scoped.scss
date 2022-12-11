@@ -1,10 +1,9 @@
 .MuiMenuItem-root  {
   border-radius: 8px;
   height: 60px;
-
 }
 
-.MuiMenuItem-root:hover  {
+.menu_img:hover  {
   background: #0D6EFD;
   color: white;
 
@@ -13,10 +12,14 @@
   }
 }
 
+.MuiList-root  {
+  padding-top: 4px,
+}
+/*
 .MuiListItemIcon-root  {
     padding-right: 15px;  
 }
-
+*/
 .notifications_box  {
   color: gray;
   display: flex;
@@ -30,8 +33,10 @@
 }
 
 .logo_img {
-    margin-bottom: 20px;
-    margin-left: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  width: 78px;
+  height: 18px;
 }
 
 .backgroung_img {
