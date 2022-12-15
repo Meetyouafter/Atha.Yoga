@@ -6,6 +6,7 @@ import Profile from './Profile/Profile';
 import Login from './Login/Login';
 import MailSend from './SignUp/MailSend';
 import Test from './Profile/Trash/Test';
+import Modal from './Modal';
 
 const App = () => (
   <Routes>
@@ -15,6 +16,7 @@ const App = () => (
     <Route path="profile" element={<Profile />} />
     <Route path="mail_send" element={<MailSend />} />
     <Route path="test" element={<Test />} />
+    <Route path="modal" element={<Modal />} />
     <Route path="*" element={<Greeting />} />
   </Routes>
 );

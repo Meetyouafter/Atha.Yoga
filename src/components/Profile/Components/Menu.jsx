@@ -94,9 +94,9 @@ const ResponsiveMenu = () => {
   );
 };
 
-const LargeMenu = () => (
+const Menu = () => (
   <ResponsiveMenu />
 
 );
 
-export default LargeMenu;
+export default Menu;

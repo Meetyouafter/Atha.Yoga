@@ -45,6 +45,15 @@ theme.typography.h4 = {
   lineHeight: '120%',
 };
 
+theme.typography.modal = {
+  fontFamily: 'Roboto',
+  fontWeight: 500,
+  fontSize: '16px',
+  lineHeight: '120%',
+  fontStyle: 'normal',
+  color: '#212121',
+};
+
 theme.typography.h5 = {
   fontFamily: 'Inter',
   fontStyle: 'normal',
